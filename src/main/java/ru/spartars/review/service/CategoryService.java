@@ -10,12 +10,23 @@ import ru.spartars.review.entity.CategoryEntity;
 import ru.spartars.review.exception.CategoryNotFoundException;
 import ru.spartars.review.repository.CategoryRepository;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class CategoryService {
     private final CategoryRepository categoryRepository;
+
+    public List<CategoryResponseDto> findAllCategories() {
+       return categoryRepository.findAll()
+                .stream()
+                .map(CategoryResponseDto::from)
+                .collect(Collectors.toList())
+        ;
+    }
 
     public void save(CategoryRequestDto dto) {
         if (dto.getId() != 0) {
