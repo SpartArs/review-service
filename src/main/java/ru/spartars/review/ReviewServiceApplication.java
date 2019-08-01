@@ -83,7 +83,7 @@ public class ReviewServiceApplication {
             reviewRepository.save(new ReviewEntity(
                     0L,
                     "Petya review",
-                    vasya,
+                    petya,
                     category,
                     LocalDateTime.now(),
                     List.of("petya", "tags")
