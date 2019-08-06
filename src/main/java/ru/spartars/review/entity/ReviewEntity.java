@@ -29,6 +29,7 @@ public class ReviewEntity {
     private UserEntity author;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private CategoryEntity category;
+    private String file;
     private LocalDateTime created;
     @ElementCollection
     private List<String> tags = new ArrayList<>();
