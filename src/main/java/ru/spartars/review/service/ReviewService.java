@@ -3,6 +3,7 @@ package ru.spartars.review.service;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -16,8 +17,11 @@ import ru.spartars.review.exception.AuthorNotFoundException;
 import ru.spartars.review.exception.ReviewNotFoundException;
 import ru.spartars.review.repository.ReviewRepository;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,6 +34,9 @@ public class ReviewService {
 
     @Setter(onMethod_ = @Autowired)
     private CategoryService categoryService;
+
+    @Value("${upload.path}")
+    private String uploadPath;
 
     public List<ReviewResponseDto> findRecent() {
         return reviewRepository.findTop10ByOrderByCreatedDesc()
@@ -47,7 +54,23 @@ public class ReviewService {
                 ;
     }
 
-    public void save(ReviewRequestDto dto, UserEntity user) {
+    public void save(ReviewRequestDto dto, UserEntity user) throws IOException {
+        String resultFilename = null;
+
+        if (dto.getFile() != null && !dto.getFile().getOriginalFilename().isEmpty()) {
+            File uploadDir = new File(uploadPath);
+
+            if (!uploadDir.exists()) {
+                uploadDir.mkdir();
+            }
+
+            String uuidFile = UUID.randomUUID().toString();
+            resultFilename = uuidFile + "." + dto.getFile().getOriginalFilename();
+
+            dto.getFile().transferTo(new File(uploadPath + "/" + resultFilename));
+            resultFilename = uploadPath + "/" + resultFilename;
+        }
+
         if (dto.getId() != 0) {
             reviewRepository.findById(dto.getId())
                     .stream()
@@ -61,12 +84,13 @@ public class ReviewService {
         }
 
 
-        CategoryEntity category = categoryService.findCategoryById(dto.getCategoryId());
+        CategoryEntity category = categoryService.findCategoryById(dto.getCategory());
         reviewRepository.save(new ReviewEntity(
                 0L,
                 dto.getContent(),
                 user,
                 category,
+                resultFilename,
                 LocalDateTime.now(),
                 dto.getTags()
         ));
