@@ -15,7 +15,7 @@ import java.util.List;
 public class CategoryRestController {
     private final CategoryService categoryService;
 
-    @GetMapping
+    @GetMapping("/categories")
     public List<CategoryResponseDto> findAll() {
         return categoryService.findAllCategories();
     }

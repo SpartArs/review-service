@@ -5,12 +5,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.spartars.review.dto.ReviewRequestDto;
 import ru.spartars.review.dto.ReviewResponseDto;
 import ru.spartars.review.entity.UserEntity;
 import ru.spartars.review.repository.ReviewRepository;
 import ru.spartars.review.service.ReviewService;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,7 +37,7 @@ public class ReviewRestController {
         return reviewService.findRecentByAuthorId(authorId);
     }
 
-    @PostMapping
+    @PostMapping(value = "/create")
     @ResponseStatus(HttpStatus.NO_CONTENT) // 204 -> DELETE/POST
     // INSERT - проблем нет
     // UPDATE - проблемы есть:
@@ -46,8 +48,12 @@ public class ReviewRestController {
     // 1. Service Level
     // 2. AccessDecisionVoter <->
     // 3. ACL
-    @PreAuthorize("hasRole('ADMIN') || #dto.id == 0 || @permissionService.isMemoAuthor(#dto.id, #user.id)")
-    public void save(@RequestBody ReviewRequestDto dto, @AuthenticationPrincipal UserEntity user) {
+//    @PreAuthorize("hasRole('ADMIN') || #dto.id == 0 || @permissionService.isMemoAuthor(#dto.id, #user.id)")
+    public void save(@AuthenticationPrincipal UserEntity user, @ModelAttribute ReviewRequestDto dto) throws IOException {
+        System.out.println("------------------------------------------  " + user.getUsername() + " " + user.getName());
+        System.out.println("------------------------------------------  " + dto.getFile().getName() + " " + dto.getFile().getOriginalFilename());
+        System.out.println("------------------------------------------  " + dto.getCategory());
+        System.out.println("------------------------------------------  " + dto.getContent());
         reviewService.save(dto, user);
     }
 
