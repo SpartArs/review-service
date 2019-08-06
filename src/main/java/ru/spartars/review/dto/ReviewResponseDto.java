@@ -17,6 +17,7 @@ public class ReviewResponseDto {
     private String content;
     private UserResponseDto author;
     private CategoryResponseDto category;
+    private String fileName;
 //    private int likes;
     private LocalDateTime created;
     private List<String> tags = new ArrayList<>();
@@ -28,6 +29,7 @@ public class ReviewResponseDto {
                 UserResponseDto.from(entity.getAuthor()),
 //                entity.getLikes(),
                 CategoryResponseDto.from(entity.getCategory()),
+                entity.getFile(),
                 entity.getCreated(),
                 entity.getTags()
         );
