@@ -13,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ReviewRequestDto {
     private long id;
+    private String reviewTitle;
     private String content;
     private long category;
     private MultipartFile file;

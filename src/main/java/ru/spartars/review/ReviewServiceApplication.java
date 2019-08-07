@@ -76,6 +76,7 @@ public class ReviewServiceApplication {
 
             var vasyaReview = new ReviewEntity(
                     0L,
+                    "First",
                     "Vasya review",
                     vasya,
                     category1,
@@ -89,6 +90,7 @@ public class ReviewServiceApplication {
 
             reviewRepository.save(new ReviewEntity(
                     0L,
+                    "Second",
                     "Petya review",
                     petya,
                     category2,

@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ReviewResponseDto {
     private long id;
+    private String reviewTitle;
     private String content;
     private UserResponseDto author;
     private CategoryResponseDto category;
@@ -25,6 +26,7 @@ public class ReviewResponseDto {
     public static ReviewResponseDto from(ReviewEntity entity) {
         return new ReviewResponseDto(
                 entity.getId(),
+                entity.getTitle(),
                 entity.getContent(),
                 UserResponseDto.from(entity.getAuthor()),
 //                entity.getLikes(),

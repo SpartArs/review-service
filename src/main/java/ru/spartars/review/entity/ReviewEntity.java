@@ -24,6 +24,7 @@ public class ReviewEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    private String title;
     private String content;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private UserEntity author;

@@ -87,6 +87,7 @@ public class ReviewService {
         CategoryEntity category = categoryService.findCategoryById(dto.getCategory());
         reviewRepository.save(new ReviewEntity(
                 0L,
+                dto.getReviewTitle(),
                 dto.getContent(),
                 user,
                 category,

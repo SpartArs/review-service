@@ -39,21 +39,8 @@ public class ReviewRestController {
 
     @PostMapping(value = "/create")
     @ResponseStatus(HttpStatus.NO_CONTENT) // 204 -> DELETE/POST
-    // INSERT - проблем нет
-    // UPDATE - проблемы есть:
-    // @AuthenticationPrincipal -> principal -> UserEntity
-    // SecurityContextHolder.getContext().getPrincipal()
-    // Request, Session, ...
-    // Domain Objects:
-    // 1. Service Level
-    // 2. AccessDecisionVoter <->
-    // 3. ACL
 //    @PreAuthorize("hasRole('ADMIN') || #dto.id == 0 || @permissionService.isMemoAuthor(#dto.id, #user.id)")
     public void save(@AuthenticationPrincipal UserEntity user, @ModelAttribute ReviewRequestDto dto) throws IOException {
-        System.out.println("------------------------------------------  " + user.getUsername() + " " + user.getName());
-        System.out.println("------------------------------------------  " + dto.getFile().getName() + " " + dto.getFile().getOriginalFilename());
-        System.out.println("------------------------------------------  " + dto.getCategory());
-        System.out.println("------------------------------------------  " + dto.getContent());
         reviewService.save(dto, user);
     }
 
