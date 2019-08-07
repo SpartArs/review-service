@@ -67,8 +67,8 @@ public class ReviewService {
             String uuidFile = UUID.randomUUID().toString();
             resultFilename = uuidFile + "." + dto.getFile().getOriginalFilename();
 
-            dto.getFile().transferTo(new File(uploadPath + "/" + resultFilename));
-            resultFilename = uploadPath + "/" + resultFilename;
+            dto.getFile().transferTo(new File(uploadPath + "/images/" + resultFilename));
+            resultFilename = "/images/" + resultFilename;
         }
 
         if (dto.getId() != 0) {
