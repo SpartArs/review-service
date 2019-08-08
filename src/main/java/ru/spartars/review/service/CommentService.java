@@ -1,12 +1,20 @@
 package ru.spartars.review.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.spartars.review.dto.CommentRequestDto;
 import ru.spartars.review.dto.CommentResponseDto;
-import ru.spartars.review.exception.CommentNotFoundException;
+import ru.spartars.review.entity.CommentEntity;
+import ru.spartars.review.entity.ReviewEntity;
+import ru.spartars.review.entity.UserEntity;
+import ru.spartars.review.exception.ReviewNotFoundException;
 import ru.spartars.review.repository.CommentRepository;
+import ru.spartars.review.repository.ReviewRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,7 +23,24 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CommentService {
 
-    CommentRepository commentRepository;
+    @Setter(onMethod_ = @Autowired)
+    private CommentRepository commentRepository;
+
+    @Setter(onMethod_ = @Autowired)
+    private ReviewRepository reviewRepository;
+
+    public void save(CommentRequestDto dto, UserEntity user) {
+        ReviewEntity reviewEntity = reviewRepository.findById(dto.getReviewId()).orElseThrow(ReviewNotFoundException::new);
+        commentRepository.save(
+                new CommentEntity(
+                        0L,
+                        dto.getText(),
+                        reviewEntity,
+                        user,
+                        LocalDateTime.now()
+                )
+        );
+    }
 
     public List<CommentResponseDto> findByReviewId(long reviewId) {
         return commentRepository.findByReviewId(reviewId)
