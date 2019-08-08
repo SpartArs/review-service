@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -20,5 +21,6 @@ public class CommentEntity {
     private ReviewEntity review;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private UserEntity author;
+    private LocalDateTime created;
 
 }

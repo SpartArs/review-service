@@ -103,7 +103,8 @@ public class ReviewServiceApplication {
                     0L,
                     "CommentByPetya",
                     vasyaReview,
-                    petya
+                    petya,
+                    LocalDateTime.now()
             ));
 
         };
