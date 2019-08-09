@@ -34,9 +34,9 @@ public class ReviewServiceApplication {
         return args -> {
             var vasya = new UserEntity(
                     0L,
-                    "Vasiliy",
-                    "vasya@localhost",
-                    passwordEncoder.encode("secret"),
+                    "Андрей",
+                    "andrey@ya",
+                    passwordEncoder.encode("test"),
                     List.of(new SimpleGrantedAuthority("ROLE_USER")),
                     true,
                     true,
@@ -46,9 +46,9 @@ public class ReviewServiceApplication {
 
             var petya = new UserEntity(
                     0L,
-                    "Petr",
-                    "petya@localhost",
-                    passwordEncoder.encode("secret"),
+                    "Николай",
+                    "nik@com",
+                    passwordEncoder.encode("test"),
                     List.of(new SimpleGrantedAuthority("ROLE_USER")),
                     true,
                     true,
@@ -61,16 +61,22 @@ public class ReviewServiceApplication {
 
             var category1 = new CategoryEntity(
                     0L,
-                    "Category-item"
+                    "Компьютеры"
             );
 
             var category2 = new CategoryEntity(
                     0L,
-                    "Category-it"
+                    "Бытовая техника"
+            );
+
+            var category3 = new CategoryEntity(
+                    0L,
+                    "Автомобили"
             );
 
             categoryRepository.save(category1);
             categoryRepository.save(category2);
+            categoryRepository.save(category3);
 
 
 
@@ -101,7 +107,15 @@ public class ReviewServiceApplication {
 
             commentRepository.save(new CommentEntity(
                     0L,
-                    "CommentByPetya",
+                    "CommentByPetya wrgfuygwfuygfruy uywgrfuywgfuy urwygfwuygf wrfugruygf",
+                    vasyaReview,
+                    petya,
+                    LocalDateTime.now()
+            ));
+
+            commentRepository.save(new CommentEntity(
+                    0L,
+                    "Петя оставил комментарий",
                     vasyaReview,
                     petya,
                     LocalDateTime.now()
