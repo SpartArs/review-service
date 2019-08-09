@@ -22,9 +22,8 @@ public class CommentRestController {
         return commentService.findByReviewId(reviewId);
     }
 
-    @PostMapping("comments/add")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void save(@AuthenticationPrincipal UserEntity user, @ModelAttribute CommentRequestDto dto) {
-        commentService.save(dto, user);
+    @PostMapping("/comments/add")
+    public CommentResponseDto save(@AuthenticationPrincipal UserEntity user, @RequestBody CommentRequestDto dto) {
+       return commentService.save(dto, user);
     }
 }

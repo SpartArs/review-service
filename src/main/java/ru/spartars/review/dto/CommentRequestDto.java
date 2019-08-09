@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class CommentRequestDto {
     private long id;
     private long reviewId;
-    private String text;
+    private String commentText;
 }

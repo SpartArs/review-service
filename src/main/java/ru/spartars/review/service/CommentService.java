@@ -29,17 +29,18 @@ public class CommentService {
     @Setter(onMethod_ = @Autowired)
     private ReviewRepository reviewRepository;
 
-    public void save(CommentRequestDto dto, UserEntity user) {
+    public CommentResponseDto save(CommentRequestDto dto, UserEntity user) {
         ReviewEntity reviewEntity = reviewRepository.findById(dto.getReviewId()).orElseThrow(ReviewNotFoundException::new);
-        commentRepository.save(
+        CommentEntity commentEntity = commentRepository.save(
                 new CommentEntity(
                         0L,
-                        dto.getText(),
+                        dto.getCommentText(),
                         reviewEntity,
                         user,
                         LocalDateTime.now()
                 )
         );
+        return CommentResponseDto.from(commentEntity);
     }
 
     public List<CommentResponseDto> findByReviewId(long reviewId) {
