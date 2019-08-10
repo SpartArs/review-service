@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.spartars.review.entity.CommentEntity;
+import ru.spartars.review.utils.DateUtil;
 
 @Data
 @NoArgsConstructor
@@ -19,7 +20,7 @@ public class CommentResponseDto {
                 commentEntity.getId(),
                 commentEntity.getText(),
                 UserResponseDto.from(commentEntity.getAuthor()),
-                commentEntity.getCreated().toString()
+                DateUtil.formatDate(commentEntity.getCreated())
         );
     }
 

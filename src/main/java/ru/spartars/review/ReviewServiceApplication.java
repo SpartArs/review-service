@@ -91,35 +91,35 @@ public class ReviewServiceApplication {
                     List.of("vasya", "tags")
             );
 
-            reviewRepository.save(vasyaReview);
+//            reviewRepository.save(vasyaReview);
 
 
-            reviewRepository.save(new ReviewEntity(
-                    0L,
-                    "Second",
-                    "Petya review",
-                    petya,
-                    category2,
-                    "https://i2.rozetka.ua/goods/10292348/68512101_images_10292348175.jpg",
-                    LocalDateTime.now(),
-                    List.of("petya", "tags")
-            ));
+//            reviewRepository.save(new ReviewEntity(
+//                    0L,
+//                    "Second",
+//                    "Petya review",
+//                    petya,
+//                    category2,
+//                    "https://i2.rozetka.ua/goods/10292348/68512101_images_10292348175.jpg",
+//                    LocalDateTime.now(),
+//                    List.of("petya", "tags")
+//            ));
 
-            commentRepository.save(new CommentEntity(
-                    0L,
-                    "CommentByPetya wrgfuygwfuygfruy uywgrfuywgfuy urwygfwuygf wrfugruygf",
-                    vasyaReview,
-                    petya,
-                    LocalDateTime.now()
-            ));
-
-            commentRepository.save(new CommentEntity(
-                    0L,
-                    "Петя оставил комментарий",
-                    vasyaReview,
-                    petya,
-                    LocalDateTime.now()
-            ));
+//            commentRepository.save(new CommentEntity(
+//                    0L,
+//                    "CommentByPetya wrgfuygwfuygfruy uywgrfuywgfuy urwygfwuygf wrfugruygf",
+//                    vasyaReview,
+//                    petya,
+//                    LocalDateTime.now()
+//            ));
+//
+//            commentRepository.save(new CommentEntity(
+//                    0L,
+//                    "Петя оставил комментарий",
+//                    vasyaReview,
+//                    petya,
+//                    LocalDateTime.now()
+//            ));
 
         };
     }
