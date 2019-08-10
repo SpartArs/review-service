@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.spartars.review.dto.RegistrationRequestDto;
 import ru.spartars.review.service.RegistrationService;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/registration")
 @RequiredArgsConstructor
