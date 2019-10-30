@@ -16,8 +16,6 @@ import javax.persistence.ManyToOne;
 public class TokenEntity {
   @Id
   private String token;
-  @ManyToOne(optional = false) // TODO: redis
-//  DDL
-//  @Column(nullable = false) // TODO: подумать правильно или нет
+  @ManyToOne(optional = false)
   private UserEntity user;
 }

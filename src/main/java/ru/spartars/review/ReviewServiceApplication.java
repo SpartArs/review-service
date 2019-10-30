@@ -34,32 +34,6 @@ public class ReviewServiceApplication {
             PasswordEncoder passwordEncoder
     ) {
         return args -> {
-            var vasya = new UserEntity(
-                    0L,
-                    "Андрей",
-                    "andrey@ya",
-                    passwordEncoder.encode("test"),
-                    List.of(new SimpleGrantedAuthority("ROLE_USER")),
-                    true,
-                    true,
-                    true,
-                    true
-            );
-
-            var petya = new UserEntity(
-                    0L,
-                    "Николай",
-                    "nik@com",
-                    passwordEncoder.encode("test"),
-                    List.of(new SimpleGrantedAuthority("ROLE_USER")),
-                    true,
-                    true,
-                    true,
-                    true
-            );
-
-            userRepository.save(vasya);
-            userRepository.save(petya);
 
             var category1 = new CategoryEntity(
                     0L,
@@ -82,46 +56,6 @@ public class ReviewServiceApplication {
 
 
 
-            var vasyaReview = new ReviewEntity(
-                    0L,
-                    "First",
-                    "Vasya review",
-                    vasya,
-                    category1,
-                    "https://c.dns-shop.ru/thumb/st1/fit/600/374/f67c67b370c460ff797ec657bae263e3/78a7f0df1589613b4e49a58f5adfa16fefef7cb20d70901b39c13e44af58b8de.jpg",
-                    LocalDateTime.now(),
-                    List.of("vasya", "tags")
-            );
-
-//            reviewRepository.save(vasyaReview);
-
-
-//            reviewRepository.save(new ReviewEntity(
-//                    0L,
-//                    "Second",
-//                    "Petya review",
-//                    petya,
-//                    category2,
-//                    "https://i2.rozetka.ua/goods/10292348/68512101_images_10292348175.jpg",
-//                    LocalDateTime.now(),
-//                    List.of("petya", "tags")
-//            ));
-
-//            commentRepository.save(new CommentEntity(
-//                    0L,
-//                    "CommentByPetya wrgfuygwfuygfruy uywgrfuywgfuy urwygfwuygf wrfugruygf",
-//                    vasyaReview,
-//                    petya,
-//                    LocalDateTime.now()
-//            ));
-//
-//            commentRepository.save(new CommentEntity(
-//                    0L,
-//                    "Петя оставил комментарий",
-//                    vasyaReview,
-//                    petya,
-//                    LocalDateTime.now()
-//            ));
 
         };
     }

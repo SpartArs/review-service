@@ -26,23 +26,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                .csrf().disable()
-//                .cors()
-//                .and()
-//                .authorizeRequests()
-//                    .antMatchers("/", "/store").permitAll()
-//                    .anyRequest().authenticated()
-//                    .and()
-//                .formLogin()
-//                    .loginPage("/login")
-//                    .permitAll()
-//                    .and()
-//                .logout()
-//                    .permitAll()
-//                    .logoutUrl("/logout")
-//                    .logoutSuccessUrl("/login?logout")
-//                    .invalidateHttpSession(true);
         http
                 .csrf().disable()
                 .cors()
@@ -53,9 +36,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/authentication").anonymous()
                 .antMatchers(HttpMethod.POST, "/api/registration", "/api/registration/confirm").anonymous()
-//      .antMatchers(HttpMethod.POST, "/api/registration", "/api/registration/confirm").access("!isAuthenticated()")
+//                .antMatchers(HttpMethod.POST, "/api/registration", "/api/registration/confirm").access("!isAuthenticated()")
                 .antMatchers(HttpMethod.POST, "/api/recovery", "/api/recovery/confirm").anonymous()
-//      .antMatchers(HttpMethod.POST, "/api/memos/{id}").access("@permissionService.hasPermission(#id)")
+//                .antMatchers(HttpMethod.POST, "/api/reviews/{id}").access("@permissionService.hasPermission(#id)")
                 .antMatchers("/api/reviews/recent/condensed").permitAll()
                 .antMatchers("/api/users/profile").authenticated()
                 .antMatchers("/api/**").hasRole("USER")

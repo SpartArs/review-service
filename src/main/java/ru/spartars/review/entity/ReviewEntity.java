@@ -16,8 +16,8 @@ import java.util.List;
 @NamedQueries({
         // TODO: глянуть оптимизацию
         @NamedQuery(
-                name = "isReviewAuthor", // желательно в Constants
-                query = "SELECT COUNT(e) FROM ReviewEntity e WHERE e.id = :memoId AND e.author.id = :userId"
+                name = "isReviewAuthor",
+                query = "SELECT COUNT(e) FROM ReviewEntity e WHERE e.id = :reviewId AND e.author.id = :userId"
         )
 })
 public class ReviewEntity {

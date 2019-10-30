@@ -39,14 +39,14 @@ public class ReviewRestController {
 
     @PostMapping(value = "/create")
     @ResponseStatus(HttpStatus.NO_CONTENT) // 204 -> DELETE/POST
-//    @PreAuthorize("hasRole('ADMIN') || #dto.id == 0 || @permissionService.isMemoAuthor(#dto.id, #user.id)")
+//    @PreAuthorize("hasRole('ADMIN') || #dto.id == 0 || @permissionService.isReviewAuthor(#dto.id, #user.id)")
     public void save(@AuthenticationPrincipal UserEntity user, @ModelAttribute ReviewRequestDto dto) throws IOException {
         reviewService.save(dto, user);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT) // 204 -> DELETE/POST
-    @PreAuthorize("hasRole('ADMIN') || @permissionService.isMemoAuthor(#id, #user.id)")
+    @PreAuthorize("hasRole('ADMIN') || @permissionService.isReviewAuthor(#id, #user.id)")
     public void removeById(@PathVariable long id, @AuthenticationPrincipal UserEntity user) {
         reviewService.removeById(id);
     }
